@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>BKT</title>
+      <link rel="stylesheet" href="../stylesheets/styles.css">
+      <link rel="stylesheet" href="../lib/codemirror.css">
+      <script src="../lib/codemirror.js"></script>
+      <script src="../mode/clike/clike.js"></script>
+      <script src="../mode/clike/test.js"></script>
+      <script src="../addon/scroll/simplescrollbars.css"></script>
+      <script src></script>
+   </head>
+   <body>
+      <header class="navbar">
+         <nav>
+            <ul>
+               <li><a href="problemerecursive.html">Probleme recursive</a></li>
+               <li>Probleme iterative</li>
+               <div class="dropdown" style="float:right">
+                     <button class="dropbtn">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                     </button>
+                     <div class="dropdown-content">
+                        <a href="../index.html">Home</a>
+                        <a href="https://www.pbinfo.ro" target="_blank">Sursa problemelor</a>
+                     </div>
+               </div>
+            </ul>
+         </nav>
+      </header>
+      <div class="piter">
+            <ul>
+               <li>
+                  <pre style="font-size: 25px; margin-left: 30px;">Problema colorarii hartii</pre>
+                  <textarea id="culoriharta">
+#include <iostream>
+#define MRCOLOUR 4
+
+using namespace std;
+
+int st[100], a[100][100];
+char culori[][11]={"", "albastru", "magenta ", "turqoize", "rosu    "};
+
+void tipar(int k){
+      for(int i=1; i<=k; i++){
+         cout << culori[st[i]] << ' ';
+      }
+      cout << '\n';
+}
+
+int valid(int k){
+      for(int i=1; i<k; i++){
+         if(st[i]==st[k] && a[i][k]){
+            return 0;
+         }
+      }
+      return 1;
+}
+
+int main(){
+int k, n, nrv, t1, t2;
+      cin >> n;
+      cin >> nrv;
+      for(;nrv;nrv--){
+         cout << "dati tarile vecine: ";
+         cin >> t1 >> t2;
+         a[t1][t2]=a[t2][t1]=1;
+      }
+      k=1;
+      st[k]=0;
+      while(k>0){
+         if(k>n){
+            tipar(--k);
+         }else{
+            if(st[k]<MRCOLOUR){
+               st[k]++;
+               if(valid(k)){
+                     st[++k]=0;
+               }
+            }else{
+                  k--;
+            }
+         }
+      }
+
+      return 0;
+}
+                  </textarea>
+               </li>
+               <li>
+                  <pre style="font-size: 25px; margin-left: 50px;">Problema monezi</pre>
+                  <textarea id="monezi">
+#include <iostream>
+
+using namespace std;
+
+int st[101],k,n,nr=0, v[100],s0;
+
+int suma(int k){
+      int s=0;
+      for(int i=1; i<=k; i++)
+         s=s+v[i]*st[i];
+      return s;
+}
+
+
+void tipar(int k){
+      cout << s0 <<"  lei = ";
+      
+      for(int i=1;i<=k;i++){
+         if(st[i]>0)
+            cout << st[i] << " * " << v[i] << " lei ";
+         if(st[i]>0 && suma(i)<s0)
+            cout << " + ";
+      }
+      cout << '\n';
+      nr++;
+}
+
+int valid(int k){
+      if(k<n && suma(k)>s0)
+         return 0;
+      if(k==n && suma(k)!=s0)
+         return 0;
+      return 1;
+}   
+
+int main(){
+      
+      cin>>n;
+      for (int i=1;i<=n; i++)
+         cin>> v[i];
+      cin>>s0;
+      
+      k=1;
+      st[k]=-1;
+      while(k){
+         if(k==n+1)
+            tipar(--k);
+         else 
+            if(st[k]<s0/v[k]){
+                  st[k]++;
+                  if(valid(k))
+                     st[++k]=-1;
+            }
+            else 
+                  k--;
+      }
+      
+      cout << nr;
+      return 0;
+}                              
+                  </textarea>
+               </li>
+               <li>
+                  <pre style="font-size: 25px; margin-left: 50px;">Problema suma ?</pre>
+                  <textarea id="suma?">
+#include <iostream>
+
+using namespace std;
+
+int sp[101], st[101], s0, n, v[101];
+
+int suma(int k){
+   sp[k]=sp[k-1]+st[k]*v[k];
+   return sp[k];
+   /*
+   int s=0;
+   for(int i=1; i<=k; i++){
+      s=s+v[i]*st[i];
+   }
+   return s;
+   */
+}
+
+void tipar(int k){
+   for(int i=1; i<=k; i-=-1){
+      if(st[i]!=0)
+         cout << st[i] << " x " << v[i] << " lei ";
+   }
+   cout << '\n';
+}
+
+int valid(int k){
+
+   if(k<n && suma(k)>s0){
+      return 0;
+   }
+   if(n==k && suma(k)!=s0){
+      return 0;
+   }
+   return 1;
+}
+
+int main(){
+
+int i, k;
+
+      cin >> n >> s0;
+      for(i=1; i<=n; i++){
+         cin >> v[i];
+      }
+
+      k=1;
+      st[k]=-1;
+
+      while(k){
+         if(k>n){
+            tipar(--k);
+         }else{
+            if(st[k]<(s0-sp[k-1])/v[k]){
+               st[k]++;
+               if(valid(k)){
+                  st[++k]=-1;
+               }
+            }else{
+               k--;
+            }
+         }
+      }
+
+      return 0;
+}
+                  </textarea>
+               </li>
+            </ul>
+         </div>
+         <script>
+            var editor = CodeMirror.fromTextArea(document.getElementById("culoriharta"), {
+               lineNumbers: true,
+               matchBrackets: true,
+               lineWrapping: true,
+               fixedGutter: false,
+               mode: "text/x-c++src",
+            });
+            var editor = CodeMirror.fromTextArea(document.getElementById("monezi"), {
+               lineNumbers: true,
+               matchBrackets: true,
+               lineWrapping: true,
+               fixedGutter: false,
+               mode: "text/x-c++src",
+            });
+            var editor = CodeMirror.fromTextArea(document.getElementById("suma?"), {
+               lineNumbers: true,
+               matchBrackets: true,
+               lineWrapping: true,
+               fixedGutter: false,
+               mode: "text/x-c++src",
+            });
+         </script>
+   </body>
+</html>

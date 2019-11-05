@@ -1,0 +1,138 @@
+.navbar {
+   background: rgba(0, 0, 0, 0.925);
+}
+.navbar ul {
+   list-style-type: none;
+   margin: 0;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.navbar li {
+   color: white;
+   display: inline-block;
+   margin-right: -4px;
+   padding: 20px;
+   transition: 0.7s;
+}
+.navbar li a {
+   color: white;
+   text-decoration: none;
+}
+.navbar:first-child{
+   margin-left: -40px;
+}
+.navbar li:hover {
+   background-color: rgb(225, 0, 255);
+}
+
+.dropbtn {
+   background-color: rgba(0,0,0,0.925);
+   color: white;
+   padding: 16px;
+   border: none;
+   cursor: pointer;
+ }
+.dropdown {
+   position: relative;
+   display: inline-block;
+}
+.dropdown-content {
+   display: none;
+   position: absolute;
+   right: 0;
+   background-color: #f9f9f9;
+   min-width: 160px;
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+   z-index: 1;
+}
+.dropdown-content a {
+   background: white;
+   color: black;   
+   display: block;
+   padding: 12px 16px;
+   text-decoration: none;
+}
+.dropbtn div{
+   width: 25px;
+   height: 3px;
+   margin: 5px;
+   background: rgb(225, 0, 255);
+}
+.dropdown-content a:hover {
+   background-color: grey;
+}
+.dropdown:hover .dropdown-content {
+   display: block;
+}
+.dropdown:hover .dropbtn {
+   background: rgb(255, 0, 255);
+   transition: 0.5s;
+}
+.dropdown:hover .dropbtn div{
+   background: white;
+}
+/* /navbar */
+
+.title div {
+   margin: 80px 0 50px 0;
+   text-align: center;
+   font-family: 'Courier New', Courier, monospace;
+   font-weight: 600;
+   font-size: 60px;
+}
+.title p {
+   margin: 70px;
+   text-align: justify;
+   text-indent: 70px;
+   font-family: 'Courier New', Courier, monospace;
+   font-size: 40px;
+}
+/* /title */
+
+.pac ul li {
+   list-style-type: none;
+   display: inline-block;
+   margin: 20px;
+}
+.pac ul li:first-child {
+   margin-left: -50px;
+}
+.pac ul li pre{
+   font-family: monospace;
+   font-size: 25px;
+   margin-left: 50px;
+}
+/* pac */
+
+.bkt ul li{
+   font-size: 30px;
+   font-family: Cambria, Cochin, Georgia, Times, serif;
+}
+/* bkt */
+
+.prec ul li:first-child {
+   margin-left: -10px;
+}
+
+.prec ul li {
+   list-style-type: none;
+   display: inline-block;
+   margin: 20px;
+}
+/* prec */
+
+.piter ul li:first-child {
+   margin-left: -10px;
+}
+
+.piter ul li {
+   list-style-type: none;
+   display: inline-block;
+   margin: 20px;
+}
+/* piter */
+
+body {
+   background-image: url('/images/background.jpg');
+   margin: 0;
+   padding: 0;
+}

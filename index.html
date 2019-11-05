@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>BKT</title>
+      <link rel="stylesheet" href="stylesheets/styles.css">
+      <link rel="stylesheet" href="lib/codemirror.css">
+      <script src="lib/codemirror.js"></script>
+      <script src="mode/clike/clike.js"></script>
+      <script src="mode/clike/test.js"></script>
+      <script src="addon/scroll/simplescrollbars.css"></script>
+      <script src="addon/edit/matchbrackets.js"></script>
+      <script src="addon/edit/"></script>
+   </head>
+   <body>
+      <header class="navbar">
+         <nav>
+            <ul>
+               <li><a href="/pages/problemerecursive.html">Probleme recursive</a></li>
+               <li><a href="/pages/problemeiterative.html">Probleme iterative</a></li>
+               <div class="dropdown" style="float:right">
+                     <button class="dropbtn">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                     </button>
+                     <div class="dropdown-content">
+                        <!--<a href="pages/contact.html">Contact</a>-->
+                        <a href="https://www.pbinfo.ro" target="_blank">Sursa problemelor</a>
+                     </div>
+               </div>
+            </ul>
+         </nav>
+      </header>
+      <div class="title">
+         <div>Metoda Backtracking</div>
+         <p>
+            Aceasta metoda se foloseste atunci cand avem o problema 
+            care cere afisarea tuturor solutiilor posibile, acestea fiind 
+            de tipul permutarilor, aranjamentelor sau combinarilor.
+         </p>
+      </div>
+      <div class="bkt">
+         <ul>
+            <li><u>Bactracking recursiv</u></li>
+            <div>
+               <p style="font-size: 25px; font-family: Cambria, Cochin, Georgia, Times, serif;;">
+                  O metoda de implementare a backtracking-ului este prin crearea a 5 functii
+                  care se executa pe un nivel <s>k</s> si rutina. Cele 5 functii sunt:
+               </p>
+                  <ol>
+                     <li>init(k) - initializeaza nivelul la care ne aflam cu 0</li>
+                     <li>succesor(k) - verifica daca exista un succesor in stiva</li>
+                     <li>valid(k) - verifica daca elementul multimii este valid pentru a fi pus in stiva</li>
+                     <li>solutie(k) - verifica daca am gasit o solutie</li>
+                     <li>tipar(k) - afiseaza solutia</li>
+                  </ol>
+            </div>
+            <div class="pac">
+               <ul>
+                  <li>
+                     <i><pre>~Permutari~</pre></i>
+                     <textarea id="PRcpp-code" style="display: none;">
+#include <iostream>
+
+using namespace std;
+
+int v[101], n;
+
+void init(int k){
+   v[k]=0;
+}
+
+int succesor(int k){
+   if(v[k]<n){
+      v[k]++;
+      return 1;
+   }else{
+      return 0;
+   }
+}
+
+int valid(int k){
+int i;
+   for(i=1; i<k; i++){
+      if(v[k]==v[i])
+         return 0;
+   }
+   return 1;
+}
+
+int solutie(int k){
+   if(k==n+1)
+      return 1;
+   return 0;
+}
+
+void tipar(int k){
+   for(int i=1; i<=k; i++)
+      cout << v[i] << ' ';
+   cout << '\n';
+}
+
+void BACK(int k){
+   if(solutie(k))
+      tipar(k-1);
+   else{
+      init(k);
+      while(succesor(k)){
+         if(valid(k))
+            BACK(k+1);
+      }
+   }
+}
+
+int main(){
+
+   cin >> n;
+   BACK(1);
+
+    return 0;
+}
+                     </textarea>
+                  </li>
+                  <li>
+                     <i><pre>~Aranjamente~</pre></i>
+                     <textarea id="ARcpp-code">
+#include <iostream>
+
+using namespace std;
+
+int v[101], n, p;
+
+void init(int k){
+   v[k]=0;
+}
+
+int succesor(int k){
+   if(v[k]<n){
+      v[k]++;
+      return 1;
+   }else{
+      return 0;
+   }
+}
+
+int valid(int k){
+int i;
+   for(i=1; i<k; i++){
+      if(v[k]==v[i])
+         return 0;
+   }
+   return 1;
+}
+
+int solutie(int k){
+   if(k==p+1)
+      return 1;
+   return 0;
+}
+
+void tipar(int k){
+   for(int i=1; i<=k; i++)
+      cout << v[i] << ' ';
+   cout << '\n';
+}
+
+void BACK(int k){
+   if(solutie(k))
+      tipar(k-1);
+   else{
+      init(k);
+      while(succesor(k)){
+         if(valid(k))
+            BACK(k+1);
+      }
+   }
+}
+
+int main(){
+
+   cin >> n >> p;
+   BACK(1);
+
+      return 0;
+}
+                     </textarea></li>
+                  <li>
+                     <i><pre>~Combinari~</pre></i>
+                     <textarea id="CRcpp-code">
+#include <iostream>
+
+using namespace std;
+
+int v[101], n, p;
+//char sir[][10]={"", "caine", "pisica", "gaina", "vulpe", "oaie"};
+
+void init(int k){
+   v[k]=0;
+}
+
+int succesor(int k){
+   if(v[k]<n){
+      v[k]++;
+      return 1;
+   }else{
+      return 0;
+   }
+}
+
+int valid(int k){
+int i;
+   for(i=1; i<k; i++){
+      if(v[k]==v[i])
+         return 0;
+   }
+   return 1;
+}
+
+int solutie(int k){
+   if(k==p+1)
+      return 1;
+   return 0;
+}
+
+void tipar(int k){
+   for(int i=1; i<=k; i++)
+      cout << v[i] << ' ';
+   cout << '\n';
+}
+
+void BACK(int k){
+   if(solutie(k))
+      tipar(k-1);
+   else{
+      init(k);
+      while(succesor(k)){
+         if(valid(k))
+            BACK(k+1);
+      }
+   }
+}
+
+int main(){
+
+   cin >> n >> p;
+   BACK(1);
+
+      return 0;
+}
+
+                     </textarea>
+                  </li>      
+               </ul>
+            </div>
+            <li><u>Bactracking iterativ</u></li>
+            <div>
+               <p style="font-size: 25px; font-family: Cambria, Cochin, Georgia, Times, serif;;">
+                  Pentru a lucra backtracking iterativ, se schimba rutina BACK, adica nu se mai reapeleaza BACK(k+1).
+                  Selectati tabul cu probleme iterative pentru a citi o problema rezolvata iterativ.
+               </p>
+            </div>
+         </ul>
+      </div>
+      <script>
+         var editor = CodeMirror.fromTextArea(document.getElementById("PRcpp-code"), {
+            lineNumbers: true,
+            matchBrackets: true,
+            lineWrapping: true,
+            fixedGutter: false,
+            mode: "text/x-c++src",
+         });
+         var editor = CodeMirror.fromTextArea(document.getElementById("ARcpp-code"), {
+            lineNumbers: true,
+            matchBrackets: true,
+            lineWrapping: true,
+            fixedGutter: false,
+            mode: "text/x-c++src",
+         });
+         var editor = CodeMirror.fromTextArea(document.getElementById("CRcpp-code"), {
+            lineNumbers: true,
+            matchBrackets: true,
+            lineWrapping: true,
+            fixedGutter: false,
+            mode: "text/x-c++src",
+         });
+      </script>
+   </body>
+</html>
